@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  bible-api:
+    build: .
+    container_name: bible-api-standalone
+    ports:
+      - "8080:8080"
+    volumes:
+      # Persistir la DB SQLite
+      - ./data:/app/data
+      # Persistir logs si quieres
+      - ./logs:/app/logs
+    environment:
+      - LOG_LEVEL=INFO
+      - DB_PATH=/app/data/bible_verses.db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  # Volumen nombrado para la DB (opcional, más robusto)
+  bible-data:
+    driver: local
