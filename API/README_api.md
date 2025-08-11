@@ -52,21 +52,6 @@ MLOps-challenge/API/
     └── logs/                   # Logs de la aplicación (persistente)
 ```
 
-## Organización de Dependencias
-
-**`requirements.txt` (ROOT) - Desarrollo completo:**
-- API: FastAPI, Gunicorn, HTTPX, Pydantic
-- Monitoreo: Prometheus, logging estructurado
-- Testing: Pytest, Locust para pruebas de carga
-- Desarrollo: Black, Flake8, MyPy para calidad de código
-- Futuro: SQLAlchemy para migración a PostgreSQL
-
-**`API/api_v1/requirements.txt` - Solo producción:**
-- API: FastAPI, Gunicorn, HTTPX, Pydantic
-- Monitoreo: Prometheus, logging estructurado
-- Base de datos: SQLAlchemy
-- Sin testing: No Locust, Pytest
-- Sin desarrollo: No Black, Flake8, MyPy
 
 **¿Cuál usar?**
 - **Desarrollo local**: `pip install -r requirements.txt` (desde root)
@@ -78,6 +63,7 @@ MLOps-challenge/API/
 ### Opción 1: Docker Compose Completo (Prometheus + Grafana)
 ```bash
 cd MLOps-challenge/API/api_v1
+pip install -r requirements.txt`
 docker build -t api_v1 .
 docker compose up -d
 ```
@@ -96,6 +82,15 @@ docker compose up -d
 - `GET /health` - Health check
 - `GET /ready` - Readiness check
 - `GET /metrics` - Métricas Prometheus
+
+
+## Ejemplos de uso
+
+```bash
+
+Ejemplo curl http://localhost:8080/top?n=1
+Ejmplo curl -X POST "http://localhost:8080/verse" -H "Content-Type: application/json" -d "{\"reference\":\"John 3:18\"}"
+```
 
 
 
