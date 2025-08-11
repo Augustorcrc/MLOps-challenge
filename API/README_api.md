@@ -87,38 +87,7 @@ docker compose up -d
 - Prometheus: http://localhost:9090
 - Grafana: http://localhost:3000 (admin/admin)
 
-### Opción 2: Solo la API (Recomendado para desarrollo)
-```bash
-cd MLOps-challenge/API/api_v1
-docker build -t api_v1 .
-docker compose -f docker-compose-api-only.yml up -d
 
-
-
-**Ventajas de solo la API:**
-- DB SQLite persistente - No se pierde al reiniciar
-- Más rápido - Solo levanta lo necesario
-- Menos recursos - Sin Prometheus/Grafana
-- Perfecto para desarrollo - API funcional completa
-- Métricas disponibles en `/metrics` endpoint
-
-### Opción 3: Ejecución Local
-```bash
-# Opción A: Desarrollo completo (recomendado)
-cd MLOps-challenge
-pip install -r requirements.txt
-cd API/api_v1
-gunicorn app.main:app -c gunicorn_conf.py
-
-# Opción B: Solo API (más rápido)
-cd MLOps-challenge/API/api_v1
-pip install -r requirements.txt
-gunicorn app.main:app -c gunicorn_conf.py
-```
-
-**¿Cuál elegir?**
-- **Opción A**: Tienes todo disponible (testing, herramientas de desarrollo)
-- **Opción B**: Solo lo necesario para ejecutar la API
 
 ## Endpoints de la API
 
@@ -128,40 +97,9 @@ gunicorn app.main:app -c gunicorn_conf.py
 - `GET /ready` - Readiness check
 - `GET /metrics` - Métricas Prometheus
 
-## Persistencia de Datos
 
-### ¿Se pierde la DB al reiniciar?
 
-**Con `docker run` sin volumen (NO persistente):**
-```bash
-docker run -d --name bible-api -p 8080:8080 bible-api:v1
-# Al eliminar el contenedor: SE PIERDE toda la DB
-```
 
-**Con volumen mapeado (SÍ persistente):**
-```bash
-docker run -d \
-  --name bible-api \
-  -p 8080:8080 \
-  -v $(pwd)/data:/app/data \
-  bible-api:v1
-# La DB se guarda en ./data/ del host - PERSISTE
-```
-
-**Con docker-compose-api-only.yml (SÍ persistente):**
-```yaml
-volumes:
-  - ./data:/app/data  # DB SQLite persistente
-  - ./logs:/app/logs  # Logs también persistentes
-```
-
-### Estructura de directorios persistente:
-```
-MLOps-challenge/API/api_v1/
-├── data/                    # DB SQLite persistente
-│   └── bible_verses.db     # Base de datos
-├── logs/                    # Logs del contenedor
-```
 
 ## Pruebas de Carga
 
@@ -195,15 +133,11 @@ locust -f locustfile.py
 #### Performance y Escalabilidad
 - Implementar cache distribuido (Redis)
 - Rate limiting por IP/usuario
-- Circuit breaker para llamadas externas
-- Load balancing horizontal
 - Auto-scaling basado en métricas
 
 #### Base de Datos
 - Migración a PostgreSQL para producción
-- Implementar migraciones automáticas
-- Backup y recovery automatizado
-- Replicación para alta disponibilidad
+
 
 #### Seguridad
 - Autenticación JWT
@@ -220,15 +154,12 @@ locust -f locustfile.py
 #### DevOps
 - Pipeline CI/CD completo
 - Despliegue en Kubernetes
-- Helm charts para K8s
-- Secret management
 - Backup automático de datos
 
 #### Monitoreo
 - Alertas automáticas
 - Dashboards personalizados
-- Log aggregation (ELK stack)
-- APM (Application Performance Monitoring)
+
 
 ### Observaciones Técnicas
 

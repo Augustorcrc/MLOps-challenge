@@ -1,8 +1,16 @@
-# MLOps Challenge
+# MLOps Challenge – API y Modelo de Predicción de Churn
 
-## Descripción del Proyecto
+Este repositorio contiene la solución completa a un desafío técnico orientado al rol de **MLOps Engineer**, abarcando tanto el desarrollo de una API de alto rendimiento como la implementación de un modelo de Machine Learning para predicción de churn.
 
- El proyecto incluye una API de versículos bíblicos con capacidades de monitoreo, observabilidad y escalabilidad. Completar
+El proyecto se divide en dos componentes principales:
+
+1. **API Bible Verses** – Servicio REST construido con FastAPI que permite consultar versículos bíblicos desde una API pública y almacenarlos en caché local para mejorar tiempos de respuesta. Incluye monitoreo con Prometheus y Grafana, pruebas de carga con Locust y una arquitectura lista para escalar en entornos productivos.
+
+2. **Modelo de Predicción de Churn** – Pipeline completo de procesamiento de datos, entrenamiento y evaluación de un modelo de clasificación basado en XGBoost, optimizado para maximizar el recall y detectar clientes con alto riesgo de baja. Se incluye análisis exploratorio, ingeniería de características, comparación de algoritmos y sistema de caché para optimizar la preparación de datos.
+
+
+Este repositorio está diseñado para mostrar no solo la implementación técnica, sino también el enfoque de **escalabilidad, observabilidad y mantenibilidad** que caracteriza a soluciones de MLOps listas para producción.
+
 
 ## Estructura del Proyecto
 
@@ -14,98 +22,56 @@ MLOps-challenge/
 ├── API/                        # Implementaciones de la API
 │   ├── api_v0/                 # Versión inicial (legacy)
 │   └── api_v1/                 # VERSIÓN DE ENTREGA
+├── Data-Science                # Modelo de churn
 └── .git/                       # Control de versiones Git
 ```
 
-## Tecnologías Utilizadas
+---
 
-- **Backend**: FastAPI, Python 3.11
-- **Servidor**: Gunicorn
-- **Base de Datos**: SQLite (demo), PostgreSQL (producción)
+##  Tecnologías Utilizadas
+
+- **Lenguaje**: Python 3.11
+- **Framework API**: FastAPI
+- **Machine Learning**: XGBoost, Scikit-learn, Pandas, Numpy
+- **Servidor API**: Gunicorn
+- **Base de Datos**: SQLite (demo) / PostgreSQL (producción)
 - **Monitoreo**: Prometheus, Grafana
-- **Testing**: Locust para pruebas de carga
+- **Testing de Carga**: Locust
 - **Containerización**: Docker, Docker Compose
-- **Observabilidad**: Métricas Prometheus, logging estructurado
+- **Observabilidad**: Logging estructurado, métricas Prometheus
 
-## Características Principales
+---
 
+##  Características Principales
+
+### API Bible Verses
 - API RESTful para consulta de versículos bíblicos
-- Sistema de cache inteligente
+- Sistema de caché persistente para mejorar tiempos de respuesta
 - Métricas de performance en tiempo real
 - Logging estructurado con correlación de requests
 - Health checks y readiness probes
-- Configuración para desarrollo y producción
-- Pruebas de carga automatizadas
+- Configuración lista para entornos de desarrollo y producción
+- Pruebas de carga con Locust
 
-## Inicio Rápido
+### Modelo de Predicción de Churn
+- Pipeline reproducible con logs y sistema de caché para procesamiento geográfico
+- Análisis exploratorio y manejo de desbalance de clases
+- Ingeniería de características y agregación inteligente por cliente
+- Comparación de múltiples algoritmos de clasificación
+- Modelo final optimizado con XGBoost priorizando recall
+- Métricas de evaluación y salidas con prediccion
 
-### Opción 1: Docker Compose Completo
-```bash
-cd MLOps-challenge/API/api_v1
-docker compose up -d
-```
+---
 
-### Opción 2: Solo la API
-```bash
-cd MLOps-challenge/API/api_v1
-docker compose -f docker-compose-api-only.yml up -d
-```
+##  Guías Rápidas
 
-### Opción 3: Desarrollo Local
-```bash
-cd MLOps-challenge
-pip install -r requirements.txt
-cd API/api_v1
-gunicorn app.main:app -c gunicorn_conf.py
-```
+Cada componente cuenta con su **propia guía de ejecución** y **dependencias**:
 
-## Servicios Disponibles
+- **API**: Instrucciones detalladas en [`API/README_api.md`](API/README_api.md)
+- **Modelo de Churn**: Instrucciones detalladas en [`Data-Science/README.md`](Data-Science/README_ds.md)
 
-- **API**: http://localhost:8080
-- **Prometheus**: http://localhost:9090
-- **Grafana**: http://localhost:3000 (admin/admin)
+---
 
-## Endpoints de la API
+##  Licencia
 
-- `POST /verse` - Obtener versículo bíblico
-- `GET /top` - Top 10 versículos más consultados
-- `GET /health` - Health check
-- `GET /ready` - Readiness check
-- `GET /metrics` - Métricas Prometheus
-
-## Pruebas de Carga
-
-```bash
-cd MLOps-challenge/API/api_v1/testing
-locust -f locustfile.py
-```
-
-## Limitaciones Conocidas
-
-- **SQLite**: No ideal para alta concurrencia (comportamiento esperado en demo)
-- **Performance**: Degradamiento gradual con 50+ usuarios simultáneos
-- **Escalabilidad**: Plan de migración a PostgreSQL para producción
-
-## Próximas Mejoras
-
-- Migración a PostgreSQL
-- Cache distribuido con Redis
-- Rate limiting y autenticación
-- Tests unitarios completos
-- Pipeline CI/CD
-- Despliegue en Kubernetes
-
-## Contribución
-
-1. Fork del repositorio
-2. Crear feature branch
-3. Implementar cambios con tests
-4. Crear Pull Request
-
-## Licencia
-
-Este proyecto es parte del MLOps Challenge y está destinado para fines educativos y de demostración.
-
-## Documentación Detallada
-
-Para información detallada sobre la API, consulta [API/README_api.md](API/README_api.md)
+Este proyecto es parte de un desafio y está destinado para fines educativos y de demostración.
