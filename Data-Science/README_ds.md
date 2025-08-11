@@ -10,9 +10,10 @@ MLOps-challenge/Data-Science/
 │   ├── dataset_churn_challenge.csv
 │   ├── dataset_churn_zona_challenge.csv
 │   └── coordenadas_procesadas_cache.csv  # Caché de coordenadas procesadas
-├── eda.ipynb                       # EDA del dataset (opcional)
-├── utils.py                        # Funciones auxiliares y lógica del modelo
-├── main.py                         # Script principal de ejecución
+├── src/                            # Carpeta source
+│   ├── eda.ipynb                   # EDA del dataset (opcional)
+│   ├── utils.py                    # Funciones auxiliares y lógica del modelo
+├   └──  main.py                    # Script principal de ejecución
 ├── requirements.txt                # Dependencias del proyecto
 ├── README.md                       # Este archivo
 ├── test/                           # Carpeta con archivos de prueba

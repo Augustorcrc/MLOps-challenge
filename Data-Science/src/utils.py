@@ -317,8 +317,8 @@ def cargar_datos():
     """Carga los datasets necesarios para el entrenamiento."""
     try:
         logging.info("Cargando datasets...")
-        df = pd.read_csv('data/dataset_churn_challenge.csv')
-        df_zonas = pd.read_csv('data/dataset_churn_zona_challenge.csv')
+        df = pd.read_csv('../data/dataset_churn_challenge.csv')
+        df_zonas = pd.read_csv('../data/dataset_churn_zona_challenge.csv')
         logging.info(f"Dataset principal cargado: {df.shape}")
         logging.info(f"Dataset de zonas cargado: {df_zonas.shape}")
         return df, df_zonas
