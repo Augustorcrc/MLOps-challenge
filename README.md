@@ -68,7 +68,7 @@ MLOps-challenge/
 Cada componente cuenta con su **propia guía de ejecución** y **dependencias**:
 
 - **API**: Instrucciones detalladas en [`API/README_api.md`](API/README_api.md)
-- **Modelo de Churn**: Instrucciones detalladas en [`Data-Science/README.md`](Data-Science/README_ds.md)
+- **Modelo de Churn**: Instrucciones detalladas en [`Data-Science/README_ds.md`](Data-Science/README_ds.md)
 
 ---
 

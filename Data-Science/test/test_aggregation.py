@@ -10,17 +10,18 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pandas as pd
 
-from utils import (
-    setup_logging, procesar_datos
+from src.utils import (
+    setup_logging
 )
-
+from src.process_data import procesar_datos
+from src.process_geo import main_process_geo
 
 def cargar_datos_test(logger):
     """Carga los datasets necesarios para el entrenamiento."""
     try:
         logger.info("Cargando datasets...")
-        df = pd.read_csv('../data/dataset_churn_challenge.csv')
-        df_zonas = pd.read_csv('../data/dataset_churn_zona_challenge.csv')
+        df = pd.read_csv('./data/dataset_churn_challenge.csv')
+        df_zonas = pd.read_csv('./data/dataset_churn_zona_challenge.csv')
         logger.info(f"Dataset principal cargado: {df.shape}")
         logger.info(f"Dataset de zonas cargado: {df_zonas.shape}")
         return df, df_zonas

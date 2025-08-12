@@ -13,7 +13,10 @@ MLOps-challenge/Data-Science/
 ├── src/                            # Carpeta source
 │   ├── eda.ipynb                   # EDA del dataset (opcional)
 │   ├── utils.py                    # Funciones auxiliares y lógica del modelo
-├   └──  main.py                    # Script principal de ejecución
+│   ├── process_data.py             # Curacion e ingenieria de features
+│   ├── process_geo.py              # ETL de data de geolocalizacion
+│   ├── train.ipynb                 # Pipeline de entrenamiento y prediccion
+├   └── main.py                     # Script principal de ejecución
 ├── requirements.txt                # Dependencias del proyecto
 ├── README.md                       # Este archivo
 ├── test/                           # Carpeta con archivos de prueba
@@ -44,13 +47,12 @@ pip install -r requirements.txt
 Para ejecutar el modelo completo:
 
 ```bash
+cd src
 python main.py
 ```
 
 ## Funcionalidades
 
-### utils.py
-Contiene todas las funciones auxiliares:
 
 #### Procesamiento de Datos
 - **Carga de datos**: Lectura de datasets CSV desde la carpeta `data/`
